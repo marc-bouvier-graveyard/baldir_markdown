@@ -5,10 +5,23 @@ current_working_directory = os.getcwd()
 
 markdown_file_name = './markdown-sample.md'
 def import_code_snippet(source_listing_infos):
-    return
+    from_line = int(source_listing_infos["from"])
+    to_line = int(source_listing_infos["to"])
+    file_content = read_source_file(source_listing_infos["source"],)
+    return cut_lines(file_content,from_line,to_line)
+
+def cut_lines(file_as_string,from_line,to_line):
+    line_array = file_as_string.split('\n')
+    
+    line_array = line_array[(from_line-1):]
+    number_of_lines = len(line_array)
+    line_array = line_array[:(number_of_lines-to_line+1)]
+    result ='\n'.join(line_array)
+    print(result)
+    return result
 
 # reads file as string
-def read_markdown_file(markdown_file_name):
+def read_source_file(markdown_file_name):
     markdown_sample = open(markdown_file_name)
 
     file_as_string = markdown_sample.read()

@@ -20,6 +20,12 @@ def cut_lines(file_as_string,from_line,to_line):
     print(result)
     return result
 
+def format_markdown_snippet(source_listing_infos):
+   md_snippet = "\n```" + source_listing_info['lang']
+   md_snippet += import_code_snippet(source_listing_infos)
+   md_snippet += '```'
+   return md_snippet
+
 # reads file as string
 def read_source_file(markdown_file_name):
     markdown_sample = open(markdown_file_name)

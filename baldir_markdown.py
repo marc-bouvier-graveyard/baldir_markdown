@@ -12,10 +12,10 @@ def import_code_snippet(source_listing_infos):
 
 def cut_lines(file_as_string,from_line,to_line):
     line_array = file_as_string.split('\n')
-    
+    line_array = line_array[:(to_line)]
     line_array = line_array[(from_line-1):]
-    number_of_lines = len(line_array)
-    line_array = line_array[:(number_of_lines-to_line+1)]
+    
+    
     result ='\n'.join(line_array)
     print(result)
     return result

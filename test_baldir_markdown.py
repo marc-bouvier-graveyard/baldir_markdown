@@ -29,3 +29,19 @@ def test_import_code_snippet_whole_file():
     }
 
 }"""
+
+def test_format_markdown_snippet():
+   formatted_snippet = format_markdown_snippet({'from': '5', 'lang': 'java', 'source': './MyJavaFile.java', 'to': '5'})
+   assert formatted_snippet ==  """```java
+public class MyJavaFile {
+
+    public static void main(String[] args){
+
+        System.out.println("Hello world");
+
+    }
+
+}
+```"""
+
+

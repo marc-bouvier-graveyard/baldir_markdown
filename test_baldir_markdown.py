@@ -20,12 +20,12 @@ def test_import_code_snippet_range():
 
 def test_import_code_snippet_whole_file():
     code_snippet = import_code_snippet({'from': '1', 'lang': 'java', 'source': './MyJavaFile.java', 'to': '9'})
-    assert code_snippet == """public class MyJavaFile{
+    assert code_snippet == """public class MyJavaFile {
 
-   public static void main(String[] args){
+    public static void main(String[] args){
 
-      System.out.println("Hello world");
+        System.out.println("Hello world");
 
-   }
+    }
 
 }"""

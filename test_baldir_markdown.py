@@ -19,5 +19,5 @@ def test_import_code_snippet_range():
     assert code_snippet == '\n        System.out.println("Hello world");'
 
 def test_import_code_snippet_whole_file():
-    code_snippet = import_code_snippet({'from': '1', 'lang': 'java', 'source': './MyJavaFile.java', 'to': '9'})
+    code_snippet = import_code_snippet({'from': '1', 'lang': 'java', 'source': './MyJavaFile.java', 'to': '8'})
     assert code_snippet == '\n        System.out.println("Hello world");'

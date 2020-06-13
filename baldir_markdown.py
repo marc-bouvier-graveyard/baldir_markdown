@@ -17,13 +17,13 @@ def cut_lines(file_as_string,from_line,to_line):
     
     
     result ='\n'.join(line_array)
-    print(result)
     return result
 
 def format_markdown_snippet(source_listing_infos):
-   md_snippet = "\n```" + source_listing_info['lang']
+   md_snippet = "```" + source_listing_infos['lang']+"\n"
    md_snippet += import_code_snippet(source_listing_infos)
-   md_snippet += '```'
+   md_snippet += '\n```'
+   print(md_snippet)
    return md_snippet
 
 # reads file as string

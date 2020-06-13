@@ -1,5 +1,5 @@
 import pytest
-from baldir_markdown import read_source_file , parse_source_listing_start, import_code_snippet
+from baldir_markdown import read_source_file , parse_source_listing_start, import_code_snippet,format_markdown_snippet
 
 def test_read_source_file():
     result = read_source_file('./markdown-sample.md')
@@ -31,7 +31,7 @@ def test_import_code_snippet_whole_file():
 }"""
 
 def test_format_markdown_snippet():
-   formatted_snippet = format_markdown_snippet({'from': '5', 'lang': 'java', 'source': './MyJavaFile.java', 'to': '5'})
+   formatted_snippet = format_markdown_snippet({'from': '1', 'lang': 'java', 'source': './MyJavaFile.java', 'to': '9'})
    assert formatted_snippet ==  """```java
 public class MyJavaFile {
 

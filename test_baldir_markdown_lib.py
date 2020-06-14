@@ -1,7 +1,7 @@
 import pytest
 import tempfile
 import shutil
-from baldir_markdown import read_source_file, parse_source_listing_start, import_code_snippet, format_markdown_snippet, split_against_source_listing_tags,pre_process_markdown_file_in_place,pre_process_markdown_text
+from baldir_markdown_lib import read_source_file, parse_source_listing_start, import_code_snippet, format_markdown_snippet, split_against_source_listing_tags,pre_process_markdown_file_in_place,pre_process_markdown_text,pre_process_markdown_file_to_string
 
 def test_pre_process_markdown_file_in_place():
     md_temp_file_path = shutil.copy('markdown-sample-without-snippet.md', tempfile.mkdtemp()+'/markdown-sample.md')
@@ -12,11 +12,21 @@ def test_pre_process_markdown_file_in_place():
     assert text_pre_processed == """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
 
 <sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
-
 ```java
         System.out.println("Hello world");
 ```
+<sourceListingEnd/>
 
+end"""
+
+def test_pre_process_markdown_file_to_string():
+    md_temp_file_path = shutil.copy('markdown-sample-without-snippet.md', tempfile.mkdtemp()+'/markdown-sample.md')
+    assert pre_process_markdown_file_to_string(md_temp_file_path) == """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
+
+<sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
+```java
+        System.out.println("Hello world");
+```
 <sourceListingEnd/>
 
 end"""
@@ -35,11 +45,9 @@ end"""
     assert result_as_string == """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
 
 <sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
-
 ```java
         System.out.println("Hello world");
 ```
-
 <sourceListingEnd/>
 
 end"""

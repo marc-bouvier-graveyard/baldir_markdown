@@ -23,18 +23,18 @@ public class MyJavaFile {
     This is a markwdown file.
 
 
-    &lt;sourceListingStart source="./src/main/MyJavaFile.java" from="5" to="5" lang="java"/&gt;
+    <sourceListingStart source="./src/main/MyJavaFile.java" from="5" to="5" lang="java"/>
     ```java
             System.out.writeln("Hello world");
     ```
-    &lt;sourceListingEnd/&gt;
+    <sourceListingEnd/>
 
 ```
 
-&lt;sourceListingStart source="./src/main/MyJavaFile.java" from="5" to="5" lang="java"/&gt;
+<sourceListingStart source="./src/main/MyJavaFile.java" from="5" to="5" lang="java"/>
 
 ```java
         System.out.writeln("Hello world");
 ```
 
-&lt;sourceListingEnd/&gt;
+<sourceListingEnd/>

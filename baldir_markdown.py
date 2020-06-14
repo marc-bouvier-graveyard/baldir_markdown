@@ -7,6 +7,10 @@ markdown_file_name = './markdown-sample.md'
 
 def pre_process_markdown_file_in_place(file_path):
     md_text = read_source_file(file_path)
+    pre_processed_md_text = pre_process_markdown_text(md_text)
+    file_to_overwrite = open(file_path,'w')
+    file_to_overwrite.write(pre_processed_md_text)
+    file_to_overwrite.close()
 
 def pre_process_markdown_text(md_text):
     splitted_md_text = split_against_source_listing_tags(md_text)

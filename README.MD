@@ -19,10 +19,9 @@ public class MyJavaFile {
 }
 ```
 
+`./markdown.md`
 
-./markdown.md
-```markdown
-
+````markdown
     This is a markwdown file.
 
 
@@ -31,8 +30,7 @@ public class MyJavaFile {
             System.out.writeln("Hello world");
     ```
     <sourceListingEnd/>
-
-```
+````
 
 <sourceListingStart source="./src/main/MyJavaFile.java" from="5" to="5" lang="java"/>
 

@@ -147,4 +147,3 @@ end"""
     assert splitted_text['text_after_end_tag'] == """
 
 end"""
-

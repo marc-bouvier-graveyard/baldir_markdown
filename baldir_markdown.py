@@ -9,9 +9,9 @@ parser.add_argument('-v', default=False,action="store_true",
                     help='verify mode. Runs the processor in dry-mode and fails if origin file does not match processed result')
 args = parser.parse_args()
 markdown_file_path = args.path
-verifyMode = args.v
+verify_mode = args.v
 
-if verifyMode:
+if verify_mode:
     result_matches_processed_file = baldir_markdown_lib.verify(
         markdown_file_path)
     if not result_matches_processed_file:

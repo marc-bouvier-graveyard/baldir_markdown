@@ -1,5 +1,7 @@
 # Baldir-Markdown
 
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=marc-bouvier_baldir_markdown&metric=alert_status)](https://sonarcloud.io/dashboard?id=marc-bouvier_baldir_markdown)
+
 Aim : a markdown preprocessor to import content of sources files from mordown file in place.
 
 `./src/main/MyJavaFile.java`

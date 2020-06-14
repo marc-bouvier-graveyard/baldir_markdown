@@ -18,7 +18,7 @@ public class MyJavaFile {
 
 
 ./markdown.md
-```
+```markdown
 
     This is a markwdown file.
 

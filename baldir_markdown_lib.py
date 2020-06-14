@@ -34,6 +34,11 @@ current_working_directory = os.getcwd()
 
 markdown_file_name = './markdown-sample.md'
 
+def verify(file_path):
+    md_text = read_source_file(file_path)
+    pre_processed_md_text = pre_process_markdown_file_to_string(file_path)
+    return md_text == pre_processed_md_text
+
 def pre_process_markdown_file_in_place(file_path):
     pre_processed_md_text = pre_process_markdown_file_to_string(file_path)
     file_to_overwrite = open(file_path,'w')

@@ -51,8 +51,31 @@ def parse_source_listing_start(xml_tag):
         source_listing_infos[attrName] = attrValue
     return source_listing_infos
 
-# get lines from range
-# construct markdown snippet between xml tags
+md_text = """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
 
-# write file
+<sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
 
+```java
+        System.out.print("Hello world");
+```
+
+<sourceListingEnd/>
+
+end"""
+
+def split_against_source_listing_tags(md_text):
+    text_before_start_tag = md_text[:md_text.index('<sourceListingStart')]
+    text_from_start_tag = md_text[md_text.index('<sourceListingStart'):]
+    index_end_start_tag = len(text_before_start_tag) + text_from_start_tag.index('/>') +2
+    start_tag = md_text[len(text_before_start_tag):index_end_start_tag]
+    start_tag_length = len(start_tag)
+    index_start_tag_to_end_tag = text_from_start_tag.index('<sourceListingEnd/>')
+    text_between_start_and_end_tags = text_from_start_tag[start_tag_length:index_start_tag_to_end_tag]
+    index_md_text_until_end_tag = md_text.index('<sourceListingEnd/>') + len('<sourceListingEnd/>')
+    text_after_end_tag = md_text[index_md_text_until_end_tag:]
+    return {
+        "text_before_start_tag":text_before_start_tag,
+        "start_tag":start_tag,
+        "text_between_start_and_end_tags":text_between_start_and_end_tags,
+        "text_after_end_tag":text_after_end_tag
+        }

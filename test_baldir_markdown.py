@@ -1,6 +1,30 @@
 import pytest
-from baldir_markdown import read_source_file, parse_source_listing_start, import_code_snippet, format_markdown_snippet, split_against_source_listing_tags
+import tempfile
+import shutil
+from baldir_markdown import read_source_file, parse_source_listing_start, import_code_snippet, format_markdown_snippet, split_against_source_listing_tags,pre_process_markdown_file_in_place,pre_process_markdown_text
 
+def test_pre_process_markdown_text():
+    markdown_text = """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
+
+<sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
+
+
+<sourceListingEnd/>
+
+end"""
+    result_as_string = pre_process_markdown_text(markdown_text)
+    print(result_as_string)
+    assert result_as_string == """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
+
+<sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
+
+```java
+        System.out.println("Hello world");
+```
+
+<sourceListingEnd/>
+
+end"""
 
 def test_read_source_file():
     result = read_source_file('./markdown-sample.md')
@@ -38,7 +62,6 @@ def test_import_code_snippet_whole_file():
     }
 
 }"""
-
 
 def test_format_markdown_snippet():
     formatted_snippet = format_markdown_snippet(

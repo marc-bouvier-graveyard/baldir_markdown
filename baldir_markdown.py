@@ -5,6 +5,27 @@ current_working_directory = os.getcwd()
 
 markdown_file_name = './markdown-sample.md'
 
+def pre_process_markdown_file_in_place(file_path):
+    md_text = read_source_file(file_path)
+
+def pre_process_markdown_text(md_text):
+    splitted_md_text = split_against_source_listing_tags(md_text)
+    start_tag = splitted_md_text['start_tag']
+    source_listing_infos = parse_source_listing_start(start_tag)
+    code_snippet = import_code_snippet(source_listing_infos)
+    splitted_md_text['text_between_start_and_end_tags'] = generate_markdown_code_listing_from_snippet(source_listing_infos,code_snippet)
+    
+    return splitted_md_text['text_before_start_tag'] + splitted_md_text['start_tag'] + splitted_md_text['text_between_start_and_end_tags'] + '<sourceListingEnd/>' + splitted_md_text['text_after_end_tag']
+
+def generate_markdown_code_listing_from_snippet(source_listing_infos,code_snippet):
+    lang = source_listing_infos['lang']
+    return """
+
+```{lang}
+{code_snippet}
+```
+
+""".format(lang=lang,code_snippet=code_snippet)
 
 def import_code_snippet(source_listing_infos):
     from_line = int(source_listing_infos["from"])
@@ -26,7 +47,6 @@ def format_markdown_snippet(source_listing_infos):
     md_snippet = "```" + source_listing_infos['lang']+"\n"
     md_snippet += import_code_snippet(source_listing_infos)
     md_snippet += '\n```'
-    print(md_snippet)
     return md_snippet
 
 # reads file as string
@@ -40,14 +60,6 @@ def read_source_file(markdown_file_name):
     markdown_sample.close()
 
     return file_as_string
-# end reads file as string
-
-# match both <sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
-# and <sourceListingEnd/>
-
-# parse xml tag and extract attributes
-#source_listing_start_tag = '<sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>'
-
 
 def parse_source_listing_start(xml_tag):
     tag_dom = xml.dom.minidom.parseString(xml_tag)
@@ -57,20 +69,6 @@ def parse_source_listing_start(xml_tag):
     for attrName, attrValue in tag.attributes.items():
         source_listing_infos[attrName] = attrValue
     return source_listing_infos
-
-
-md_text = """Markdown preprocessor should replace code snippet between `sourceListingStart` and `sourceListingEnd` with code from the source file.
-
-<sourceListingStart source="./MyJavaFile.java" from="5" to="5" lang="java"/>
-
-```java
-        System.out.print("Hello world");
-```
-
-<sourceListingEnd/>
-
-end"""
-
 
 def split_against_source_listing_tags(md_text):
     text_before_start_tag = md_text[:md_text.index('<sourceListingStart')]
